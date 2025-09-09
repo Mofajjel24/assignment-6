@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Earth</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind + daisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      nav > div:first-child {
+        font-weight: 600;
+      }
+
+      nav ul {
+        gap: 6rem;
+      }
+
+      nav .btn {
+        color: #15803d;
+        border-radius: 2rem;
+        font-weight: 400;
+      }
+
+      section.relative h1 {
+        font-weight: bold;
+        font-size: 3rem;
+        color: #000;
+      }
+
+      section.relative p {
+        font-weight: 400;
+        font-size: 1rem;
+        color: #1f2937;
+      }
+
+      section.relative .btn {
+        padding: 0.75rem 2rem;
+        color: #15803d;
+        background-color: #facc15;
+        border-radius: 2rem;
+      }
+
+      section h2.font-semibold.text-center {
+        font-weight: 600;
+        font-size: 2rem;
+        color: #1f2937;
+      }
+
+      aside h2.font-bold {
+        font-weight: 600;
+        font-size: 1.25rem;
+        text-align: left;
+      }
+
+      aside.bg-white h2 {
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: #1f2937;
+      }
+
+      aside.bg-white ul li {
+        font-weight: 400;
+        font-size: 1rem;
+        color: #1f2937;
+      }
+
+      aside.bg-white ul li span.price {
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+
+      aside.bg-white ul li button.add-to-cart {
+        background-color: #15803d;
+        border-radius: 0.5rem;
+        color: white;
+      }
+
+      div > h2.text-3xl.font-bold {
+        font-weight: 600;
+        font-size: 2rem;
+        color: #1f2937;
+      }
+
+      section.bg-green-100 h2 {
+        color: #1f2937;
+        font-weight: 600;
+        font-size: 2rem;
+      }
+
+      section.bg-green-100 p {
+        color: #1f2937;
+      }
+
+      section.bg-green-700 h2 {
+        font-weight: 600;
+        font-size: 2rem;
+        color: white;
+      }
+
+      .impact-number {
+        color: #22c55e; /* green-500 */
+      }
+
+      /* Donate Now button rounded */
+      section.bg-green-700 .btn-donate {
+        color: #15803d;
+        border-radius: 2rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body class="bg-green-50 text-gray-800">
+    <!-- Navbar -->
+    <nav
+      class="bg-green-800 text-white flex justify-between items-center px-8 py-4"
+    >
+      <div class="font-semibold text-xl">Green Earth</div>
+      <ul class="flex gap-6">
+        <li><a href="#about" class="hover:text-yellow-400">About</a></li>
+        <li><a href="#gallery" class="hover:text-yellow-400">Gallery</a></li>
+        <li>
+          <a href="#donate" class="hover:text-yellow-400">Plant a Tree</a>
+        </li>
+      </ul>
+      <button
+        class="btn bg-yellow-400 border-none text-black hover:bg-yellow-500"
+      >
+        Plant a Tree
+      </button>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      id="hero"
+      class="relative text-center py-24 bg-green-100 flex items-center justify-center overflow-hidden"
+    >
+      <img
+        src="assets/hero-leaf1.png"
+        class="absolute left-0 top-0 h-full w-1/4 object-cover"
+      />
+      <img
+        src="assets/hero-leaf2.png"
+        class="absolute right-0 top-0 h-full w-1/4 object-cover"
+      />
+
+      <div class="relative z-10 max-w-2xl px-4">
+        <h1 class="text-3xl md:text-4xl font-semibold">
+          Plant a Tree, Grow a Future
+        </h1>
+        <p class="mt-4 text-gray md:text-md font-normal text-gray-300">
+          Join our mission to plant 1 million trees and make the Earth greener
+          for future generations.
+        </p>
+        <button class="btn bg-yellow-400 border-none mt-6 hover:bg-yellow-500">
+          Get Involved
+        </button>
+      </div>
+    </section>
+
+    <!-- Categories + Trees -->
+    <section id="gallery" class="pt-24 pb-12 max-w-7xl mx-auto">
+      <h2 class="font-semibold text-center text-3xl mb-4">Choose Your Trees</h2>
+      <div class="grid grid-cols-12 gap-6 px-8 py-12">
+        <aside class="col-span-2">
+          <h2 class="font-bold text-lg mb-4">Categories</h2>
+          <div id="category-list" class="flex flex-col gap-2"></div>
+        </aside>
+
+        <main class="col-span-8">
+          <div
+            id="tree-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          ></div>
+          <div id="loading" class="text-center hidden">
+            <span
+              class="loading loading-spinner loading-lg text-green-600"
+            ></span>
+          </div>
+        </main>
+
+        <aside class="col-span-2 bg-white rounded-lg p-4 shadow">
+          <h2 class="font-bold mb-4">Your Cart</h2>
+          <ul id="cart-list" class="space-y-2"></ul>
+          <div class="mt-4 border-t pt-2 font-semibold flex justify-between">
+            <span>Total:</span>
+            <span id="cart-total">৳0</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- About -->
+    <div id="about">
+      <h2 class="text-3xl font-bold text-center mb-4">About the Campaign</h2>
+      <section
+        class="px-8 py-12 grid md:grid-cols-2 gap-6 items-center text-gray-600 max-w-6xl mx-auto"
+      >
+        <img src="assets/about.png" class="rounded-lg" />
+        <div>
+          <p>
+            Green Earth is a global tree plantation initiative dedicated to
+            fighting climate change. Since our start, we've planted over 500,000
+            trees worldwide. By joining our campaign, you help restore forests,
+            create habitats for wildlife, and combat global warming.
+          </p>
+          <ul class="list-disc ml-6 mt-2">
+            <li>Restoration of natural habitats</li>
+            <li>Improvement of air quality</li>
+            <li>Support for local communities</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Impact -->
+    <div class="bg-green-100">
+      <section
+        class="max-w-7xl mx-auto px-2 py-12 grid md:grid-cols-3 gap-12 text-center"
+      >
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h2 class="impact-number text-2xl font-bold">500K+</h2>
+          <p>Trees Planted</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h2 class="impact-number text-2xl font-bold">120+</h2>
+          <p>Communities Involved</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h2 class="impact-number text-2xl font-bold">30+</h2>
+          <p>Countries Reached</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Donate -->
+    <section id="donate" class="bg-green-800 py-12 text-center">
+      <h2 class="text-white text-2xl font-semibold mb-8">Plant a Tree Today</h2>
+      <div class="bg-green-700 max-w-md mx-auto p-6 rounded-xl shadow-lg">
+        <input
+          type="text"
+          placeholder="Your Name"
+          class="input input-bordered w-full mb-3"
+        />
+        <input
+          type="email"
+          placeholder="Your Email Address"
+          class="input input-bordered w-full mb-3"
+        />
+        <select class="select select-bordered w-full mb-3">
+          <option disabled selected>Number of Trees</option>
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+        </select>
+        <button
+          class="w-full btn-donate font-semibold rounded-3xl bg-yellow-400 hover:bg-yellow-500 py-3"
+        >
+          Donate Now
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white py-4 text-center text-sm">
+      © 2025 Green Earth. All Rights Reserved.
+    </footer>
+
+    <!-- Modal -->
+    <dialog id="tree-modal" class="modal">
+      <div class="modal-box">
+        <h3 id="modal-name" class="font-bold text-xl"></h3>
+        <img id="modal-img" class="my-3 rounded-lg w-full h-80 object-cover" />
+        <p id="modal-description" class="mb-2"></p>
+        <span
+          id="modal-category"
+          class="inline-block px-2 py-1 rounded-full text-[#15803D]"
+          style="background-color: #dcfce7"
+        ></span>
+        <p class="mt-2 font-semibold"><span id="modal-price"></span></p>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="index.js"></script>
+  </body>
+</html>
